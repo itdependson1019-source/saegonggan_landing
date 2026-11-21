@@ -15,12 +15,12 @@
   ];
   const flows = {
     explore: [
-      {key:'interest', kicker:'01 / THE SPARK', title:'요즘 마음이 가는 건\n무엇인가요?', description:'거창한 아이디어 말고, 좋아하는 것 하나면 충분해요.', type:'text', placeholder:'예: 커피, 작은 전시, 오래된 책방, 손으로 만드는 것', suggestions:['책과 글','커피와 취향','사진과 기록','만들기','동네 이야기']},
+      {key:'interest', kicker:'01 / THE SPARK', title:'요즘 마음이 가는 건\n무엇인가요?', description:'좋아하는 것, 그걸 왜 좋아하는지, 누구와 어떤 시간을 보내고 싶은지도 적어주세요. 구체적으로 말할수록 내 취향과 상황에 더 가까운 제안을 만드는 데 도움이 돼요.', type:'text', placeholder:'예: 커피를 좋아해요. 처음 만나는 사람들과 작은 카페에서 각자 좋아하는 커피 이야기를 나누고 싶어요.', suggestions:['책과 글','커피와 취향','사진과 기록','만들기','동네 이야기']},
       {key:'experience', kicker:'02 / THE FEELING', title:'어떤 시간을\n만들고 싶나요?', description:'무엇을 ‘할지’보다 그 시간에 어떤 경험을 나누고 싶은지 골라보세요.', type:'choice', options:CHOICE_EXPERIENCE},
       {key:'barrier', kicker:'03 / THE HURDLE', title:'시작을 망설이게 하는 건\n무엇인가요?', description:'가장 걸리는 것 하나만 골라주세요. 거기서부터 작게 시작할 방법을 찾아볼게요.', type:'choice', options:CHOICE_BARRIER, extra:'더 알려주고 싶은 상황이 있다면 적어주세요. (선택)'}
     ],
     ready: [
-      {key:'activity', kicker:'01 / YOUR IDEA', title:'어떤 활동을\n생각하고 있나요?', description:'아직 정리되지 않은 한 문장이어도 좋아요.', type:'text', placeholder:'예: 동네에서 작은 향수 만들기 클래스를 열고 싶어요'},
+      {key:'activity', kicker:'01 / YOUR IDEA', title:'어떤 활동을\n생각하고 있나요?', description:'활동 내용뿐 아니라 누가 함께하면 좋을지, 어떤 분위기로 해보고 싶은지도 적어주세요. 구체적인 설명이 있으면 더 잘 맞는 첫 기획을 만들 수 있어요.', type:'text', placeholder:'예: 향을 좋아하는 사람 4~6명과 주말 오후에 작은 향수 만들기 클래스를 열고 싶어요.'},
       {key:'experience', kicker:'02 / THE PEOPLE', title:'참여하는 사람에게\n어떤 시간을 선물하고 싶나요?', description:'첫 회차가 어떤 경험으로 남았으면 좋겠는지 골라주세요.', type:'choice', options:CHOICE_EXPERIENCE},
       {key:'barrier', kicker:'03 / THE HURDLE', title:'가장 막막한 부분은\n무엇인가요?', description:'실행을 방해하는 가장 큰 장벽을 먼저 줄여볼게요.', type:'choice', options:CHOICE_BARRIER, extra:'이미 생각해 둔 조건(인원·시간 등)이 있다면 적어주세요. (선택)'}
     ]
@@ -53,7 +53,7 @@
     $('question-error').hidden = true;
     const box = $('question-field'); box.replaceChildren();
     if (q.type === 'text') {
-      const label = elt('label','input-block','생각나는 단어 또는 한 문장'); label.setAttribute('for','answer-input');
+      const label = elt('label','input-block',q.key === 'interest' ? '관심사와 해보고 싶은 경험' : '준비하고 싶은 활동과 분위기'); label.setAttribute('for','answer-input');
       const input = elt('textarea','question-input'); input.id = 'answer-input'; input.rows = 3; input.maxLength = 180;
       input.placeholder = q.placeholder; input.value = store.answers[q.key] || '';
       label.appendChild(input); box.appendChild(label);
@@ -62,7 +62,7 @@
         q.suggestions.forEach(s => { const b = elt('button','',s); b.type='button';b.addEventListener('click',()=>{input.value=s;input.focus();});chips.appendChild(b); });
         box.appendChild(chips);
       }
-      box.appendChild(elt('p','field-hint','한두 단어만 적어도 좋아요. 이름이나 연락처 등 개인 정보는 적지 마세요.'));
+      box.appendChild(elt('p','field-hint','한 단어만 적어도 시작할 수 있어요. 다만 좋아하는 이유나 원하는 경험을 더 구체적으로 적으면, 파트너가 더 잘 맞는 제안을 만드는 데 도움이 돼요. (최대 180자 · 개인정보는 입력하지 마세요.)'));
     } else {
       const group = elt('div','question-choice-group');group.setAttribute('role','radiogroup');group.setAttribute('aria-label',q.title.replace('\n',' '));
       q.options.forEach((option, i)=>{
@@ -80,7 +80,7 @@
       }
     }
     $('question-next').textContent = index === flows[store.path].length-1 ? (store.path==='explore'?'나에게 맞는 활동 아이디어 보기 ↗':'첫 활동 기획안 만들기 ↗') : '다음으로 ↗';
-    setProgress(index+1,store.path==='explore'?5:4,'AI 첫 실행 파트너 / '+(store.path==='explore'?'아이디어 발견':'첫 회차 기획'));
+    setProgress(index+1,store.path==='explore'?5:4,'새:공간 파트너 / '+(store.path==='explore'?'아이디어 발견':'첫 회차 기획'));
     setView('question');
   }
   function saveQuestion() {
@@ -145,7 +145,7 @@
       btn.addEventListener('click',()=>{store.selected=i;renderIdeas($('ideas-intro').textContent);});list.appendChild(btn);
     });
     $('idea-error').hidden=true;
-    setProgress(4,5,'AI 첫 실행 파트너 / 아이디어 선택');setView('ideas');
+    setProgress(4,5,'새:공간 파트너 / 아이디어 선택');setView('ideas');
   }
   async function getPlan() {
     if(store.busy)return;
@@ -170,21 +170,21 @@
     (p.session||[]).forEach(item=>{const row=elt('li');row.append(elt('span','',item.minutes),elt('p','',item.activity));list.appendChild(row);});
     fillList('plan-prep',p.prep);fillList('plan-space',p.spaceConsiderations);fillList('plan-cost',p.costConsiderations);
     $('plan-demo').hidden=!demo;$('another-idea').hidden=store.path!=='explore';
-    setProgress(store.path==='explore'?5:4,store.path==='explore'?5:4,'AI 첫 실행 파트너 / 첫 기획 완성');setView('plan');
+    setProgress(store.path==='explore'?5:4,store.path==='explore'?5:4,'새:공간 파트너 / 첫 기획 완성');setView('plan');
   }
   function planText(p){return [p.title,p.oneLiner,`추천 대상: ${p.audience}`,`시작 규모: ${p.sizeSuggestion} (제안)`,`첫 회차 시간: ${p.durationSuggestion} (제안)`,
       '\n[첫 회차 구성]',...p.session.map(x=>`${x.minutes} · ${x.activity}`),'\n[모집 문구]',p.recruitment,'\n[오늘의 첫 행동]',p.firstAction.title,p.firstAction.detail,
       '\n[실행 전 체크]',...p.prep,'\n[공간을 볼 때]',...p.spaceConsiderations,'\n[비용 항목]',...p.costConsiderations,'\n※ 실제 공간 조건은 별도 확인해야 합니다.'].join('\n');}
   async function copy(text,button,label){try{await navigator.clipboard.writeText(text);button.textContent='복사했어요 ✓';setTimeout(()=>button.textContent=label,2000);}catch{const area=elt('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();try{document.execCommand('copy');button.textContent='복사했어요 ✓';setTimeout(()=>button.textContent=label,2000);}catch{button.textContent='복사하지 못했어요';}area.remove();}}
   document.querySelectorAll('[data-path]').forEach(b=>b.addEventListener('click',()=>{store.path=b.dataset.path;store.step=0;store.answers={};store.ideas=[];store.selected=-1;setQuestion(0);}));
-  $('question-back').addEventListener('click',()=>{if(store.step===0){setProgress(0,5,'첫 실행 파트너 / 시작');setView('choice');}else setQuestion(store.step-1);});
+  $('question-back').addEventListener('click',()=>{if(store.step===0){setProgress(0,5,'새:공간 파트너 / 시작');setView('choice');}else setQuestion(store.step-1);});
   $('question-next').addEventListener('click',async()=>{if(!saveQuestion())return;if(store.step<flows[store.path].length-1)setQuestion(store.step+1);else if(store.path==='explore')await getIdeas();else await getPlan();});
   $('ideas-back').addEventListener('click',()=>setQuestion(flows.explore.length-1));
   $('ideas-next').addEventListener('click',getPlan);
   $('another-idea').addEventListener('click',()=>renderIdeas('다른 아이디어로도 첫 회차를 구체화해볼 수 있어요.'));
-  $('restart').addEventListener('click',()=>{store.path=null;store.answers={};store.ideas=[];store.selected=-1;store.plan=null;setProgress(0,5,'첫 실행 파트너 / 시작');setView('choice');window.scrollTo({top:0,behavior:'smooth'});});
+  $('restart').addEventListener('click',()=>{store.path=null;store.answers={};store.ideas=[];store.selected=-1;store.plan=null;setProgress(0,5,'새:공간 파트너 / 시작');setView('choice');window.scrollTo({top:0,behavior:'smooth'});});
   $('copy-plan').addEventListener('click',()=>{if(store.plan)copy(planText(store.plan),$('copy-plan'),'기획안 전체 복사 ↗');});
   $('copy-invite').addEventListener('click',()=>{if(store.plan)copy(store.plan.recruitment,$('copy-invite'),'모집 문구 복사 ↗');});
   if(demo)$('demo-flag').hidden=false;
-  setProgress(0,5,'첫 실행 파트너 / 시작');setView('choice');
+  setProgress(0,5,'새:공간 파트너 / 시작');setView('choice');
 })();
