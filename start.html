@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="description" content="생각만 하던 모임, 클래스, 작은 프로젝트를 실행 계획으로. 새:공간 내 활동 준비하기.">
+ <title>내 활동 준비하기 — 새:공간</title>
+ <link rel="icon" type="image/png" href="./favicon.png">
+ <link rel="stylesheet" href="./styles/start.css">
+</head>
+<body>
+ <a class="skip-link" href="#flow">질문으로 바로 이동</a>
+ <header class="start-header">
+   <a class="start-brand" href="./index.html" aria-label="새:공간 홈">새<span>:</span>공간 <small>NEW SPACE</small></a>
+   <nav class="start-header__nav" aria-label="페이지 내비게이션"><a href="./index.html">서비스 소개 ↗</a><a href="./index.html?view=spaces">공간 둘러보기 ↗</a></nav>
+ </header>
+ <main class="start-layout" id="flow">
+   <aside class="start-story" aria-label="내 활동 준비하기 소개">
+      <div class="start-story__top"><span>YOUR NEXT CHAPTER</span><span>01 — 05</span></div>
+      <div class="start-story__heading"><p class="start-story__kicker">IDEA → ACTION</p><h1>마음에만 두었던<br><em>그 일을,</em><br>이제 조금 더 선명하게.</h1><p>하고 싶은 활동을 몇 가지 질문으로 정리하면, 지금 필요한 준비와 다음 걸음을 함께 찾아볼 수 있어요.</p></div>
+      <div class="start-story__visual" aria-hidden="true"><span class="start-story__orbit"></span><span class="start-story__circle"></span><span class="start-story__paper"><small>AN IDEA HAS A PLACE.</small><strong>나의 생각이<br>현실에 닿는 곳.</strong><small>BUCHEON / WONJONG</small></span><span class="start-story__seal">NEW<br>BEGINNING<br>↗</span></div>
+      <div class="start-story__foot"><span>LOCAL SPACES · NEW BEGINNINGS</span><span>SCROLL TO BEGIN ↓</span></div>
+   </aside>
+   <section class="start-workspace" aria-label="활동 준비 질문과 결과">
+      <div class="start-workspace__top"><span>첫 시작 가이드</span><span id="step-count" aria-live="polite">01 / 05</span></div>
+      <div class="start-progress" role="progressbar" aria-label="진단 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><span id="progress-fill"></span></div>
+      <div id="form-view">
+        <form id="start-form" novalidate>
+          <section class="start-step is-active" data-step="0" aria-labelledby="q-title-0">
+            <p class="start-step__eyebrow">01 / IMAGINE</p><h2 id="q-title-0">어떤 일을<br>시작하고 싶나요?</h2>
+            <p class="start-step__lead">정확한 계획이 없어도 괜찮아요. 지금 떠오르는 활동을 골라주세요.</p>
+            <fieldset class="start-options" data-required="type"><legend class="sr-only">활동 유형</legend>
+               <label><input type="radio" name="type" value="모임·커뮤니티"><span>모임 · 커뮤니티</span><small>독서, 취미, 네트워킹</small></label>
+               <label><input type="radio" name="type" value="클래스·워크숍"><span>클래스 · 워크숍</span><small>원데이 클래스, 배움</small></label>
+               <label><input type="radio" name="type" value="팝업·전시"><span>팝업 · 전시</span><small>작은 행사, 작품 소개</small></label>
+               <label><input type="radio" name="type" value="기타·미정"><span>다른 활동 / 아직 고민 중</span><small>아이디어부터 정리해 볼게요</small></label>
+            </fieldset>
+            <label class="start-field">활동을 한 문장으로 적어볼까요? <small>선택</small><input name="idea" type="text" maxlength="160" placeholder="예: 퇴근 후 서로의 책을 소개하는 모임"></label>
+          </section>
+          <section class="start-step" data-step="1" aria-labelledby="q-title-1" hidden>
+            <p class="start-step__eyebrow">02 / SHAPE</p><h2 id="q-title-1">지금은 어느<br>지점에 있나요?</h2>
+            <p class="start-step__lead">준비 상태와 예상 인원을 알면 필요한 준비를 더 정확히 정리할 수 있어요.</p>
+            <fieldset class="start-options" data-required="stage"><legend class="start-label">현재 준비 단계</legend>
+               <label><input type="radio" name="stage" value="아이디어만 있음"><span>아이디어만 있어요</span></label>
+               <label><input type="radio" name="stage" value="프로그램 구상 중"><span>내용을 구체화하는 중이에요</span></label>
+               <label><input type="radio" name="stage" value="참여자·일정 준비 중"><span>참여자나 일정을 준비 중이에요</span></label>
+               <label><input type="radio" name="stage" value="공간만 찾으면 됨"><span>공간만 찾으면 진행할 수 있어요</span></label>
+            </fieldset>
+            <label class="start-field">예상 참여 인원 <small>필수</small><select name="people" required><option value="">선택해 주세요</option><option>1~4명</option><option>5~8명</option><option>9~12명</option><option>13~20명</option><option>21명 이상</option><option>아직 미정</option></select></label>
+          </section>
+          <section class="start-step" data-step="2" aria-labelledby="q-title-2" hidden>
+            <p class="start-step__eyebrow">03 / PLACE & BUDGET</p><h2 id="q-title-2">어디에서,<br>어느 정도로 시작할까요?</h2>
+            <p class="start-step__lead">아직 구체적인 장소나 예산을 정하지 않았어도 괜찮아요.</p>
+            <label class="start-field">희망 지역 <small>필수</small><select name="region" required><option value="">선택해 주세요</option><option>부천 원종동</option><option>부천 내 다른 지역</option><option>경기·인천</option><option>서울</option><option>지역 무관</option><option>미정</option></select></label>
+            <label class="start-field">활동 전체 예산 <small>필수</small><select name="budget" required><option value="">선택해 주세요</option><option>5만원 미만</option><option>5만~10만원</option><option>10만~30만원</option><option>30만원 이상</option><option>아직 미정</option></select></label>
+            <p class="start-info">전체 예산은 공간 이용료뿐 아니라 재료비·홍보비 등도 포함한 금액이에요.</p>
+          </section>
+          <section class="start-step" data-step="3" aria-labelledby="q-title-3" hidden>
+            <p class="start-step__eyebrow">04 / CONDITIONS</p><h2 id="q-title-3">어떤 공간이<br>필요할까요?</h2>
+            <p class="start-step__lead">필요해 보이는 조건을 선택해 주세요. 여러 개 골라도 좋아요.</p>
+            <fieldset class="start-chips"><legend class="start-label">필요한 공간 조건 <small>선택</small></legend>
+              <label><input type="checkbox" name="needs" value="테이블·의자"><span>테이블 · 의자</span></label>
+              <label><input type="checkbox" name="needs" value="조용한 환경"><span>조용한 환경</span></label>
+              <label><input type="checkbox" name="needs" value="프로젝터·스크린"><span>프로젝터 · 스크린</span></label>
+              <label><input type="checkbox" name="needs" value="음향 시설"><span>음향 시설</span></label>
+              <label><input type="checkbox" name="needs" value="전시·진열 공간"><span>전시 · 진열</span></label>
+              <label><input type="checkbox" name="needs" value="음식·음료 이용"><span>음식 · 음료 이용</span></label>
+              <label><input type="checkbox" name="needs" value="접근성"><span>대중교통 접근성</span></label>
+            </fieldset>
+            <label class="start-field">기타 중요한 조건 <small>선택</small><input name="conditionNote" maxlength="140" placeholder="예: 주말 오후 2시간, 준비물 보관 등"></label>
+          </section>
+          <section class="start-step" data-step="4" aria-labelledby="q-title-4" hidden>
+            <p class="start-step__eyebrow">05 / NEXT STEP</p><h2 id="q-title-4">지금 가장<br>막막한 부분은 무엇인가요?</h2>
+            <p class="start-step__lead">가장 먼저 해결하고 싶은 한 가지를 골라주세요.</p>
+            <fieldset class="start-options" data-required="challenge"><legend class="sr-only">가장 어려운 점</legend>
+               <label><input type="radio" name="challenge" value="아이디어 구체화"><span>아이디어를 구체화하기 어려워요</span></label>
+               <label><input type="radio" name="challenge" value="공간 찾기"><span>맞는 공간을 찾기 어려워요</span></label>
+               <label><input type="radio" name="challenge" value="예산·비용"><span>예산과 비용이 고민이에요</span></label>
+               <label><input type="radio" name="challenge" value="참여자 모집"><span>함께할 사람을 모으기 어려워요</span></label>
+               <label><input type="radio" name="challenge" value="운영 준비"><span>운영과 준비 순서를 모르겠어요</span></label>
+            </fieldset>
+            <label class="start-field">더 알려주고 싶은 내용 <small>선택</small><textarea name="notes" rows="3" maxlength="300" placeholder="상황을 조금 더 적어주면 결과를 구체화하는 데 도움이 돼요."></textarea></label>
+          </section>
+          <p class="start-error" id="form-error" role="alert" hidden></p>
+          <div class="start-controls"><button class="start-back" id="back-btn" type="button" disabled>← 이전</button><button class="start-next" id="next-btn" type="button">다음 단계 <span aria-hidden="true">↗</span></button></div>
+        </form>
+      </div>
+      <div id="loading-view" class="start-loading" hidden role="status" aria-live="polite"><div class="start-loading__symbol" aria-hidden="true">◌</div><h2>지금 필요한<br>준비를 정리하고 있어요.</h2><p>입력한 조건을 바탕으로 실행 계획을 작성하고 있습니다.</p></div>
+      <div id="result-view" class="start-result" hidden aria-live="polite">
+        <p class="start-step__eyebrow">YOUR ACTION NOTES / 결과</p>
+        <h2 id="result-headline">내 활동을 위한 첫 장</h2><p class="start-result__summary" id="result-summary"></p>
+        <p id="demo-warning" class="start-demo-warning" hidden>샘플 미리보기입니다. 실제 AI 진단 결과가 아닙니다.</p>
+        <div class="start-result__grid"><section><h3>지금 준비된 부분</h3><ul id="result-ready"></ul></section><section><h3>우선 할 일 3가지</h3><ol id="result-priorities"></ol></section><section><h3>공간을 볼 때 확인할 것</h3><ul id="result-space"></ul></section><section><h3>예산에 포함할 항목</h3><ul id="result-cost"></ul></section></div>
+        <section class="start-result__next"><h3>다음에 해볼 일</h3><ol id="result-next"></ol><p id="result-note"></p></section>
+        <div class="start-result__actions"><button type="button" id="copy-btn">결과 복사하기 ↗</button><a href="./index.html?view=spaces">지역 공간 둘러보기 ↗</a><button type="button" id="restart-btn">처음부터 다시</button></div>
+        <p class="start-result__disclaimer">이 결과는 활동 계획을 돕기 위한 참고 가이드입니다. 특정 공간의 이용 가능 여부, 가격, 허가 사항을 보장하지 않습니다. 최종 조건은 해당 공간과 확인해 주세요.</p>
+      </div>
+      <div class="start-workspace__note"><span>NO SIGN-UP REQUIRED</span><p>회원가입 없이 이용할 수 있어요. 진단 답변은 서비스 제공을 위해 AI 처리 서버로 전달되며, 연락처를 요청하지 않습니다. 개인정보 등 민감한 내용은 적지 마세요.</p></div>
+   </section>
+ </main>
+ <script src="./scripts/start.js" defer></script>
+</body>
+</html>
